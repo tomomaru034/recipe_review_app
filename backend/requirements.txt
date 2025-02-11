@@ -1,0 +1,4 @@
+fastapi
+uvicorn
+psycopg2-binary  # PostgreSQL接続用
+sqlalchemy       # ORMとして使用
