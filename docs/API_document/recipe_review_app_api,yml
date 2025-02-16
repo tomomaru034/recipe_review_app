@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: レシピ記録アプリ API仕様
 servers:
-  - url: http://localhost:3000
+  - url: http://localhost:3001
     description: Localサーバ
 
 paths:
@@ -28,6 +28,12 @@ paths:
     post:
       summary: レシピ新規登録
       description: レシピ新規登録
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
       requestBody:
         required: true
         content:
@@ -64,7 +70,12 @@ paths:
       summary: レシピ詳細更新
       description: レシピ詳細更新
       parameters:
-        - name: id
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: recipe_id
           in: path
           required: true
           schema:
@@ -82,7 +93,12 @@ paths:
       summary: レシピ削除
       description: レシピ削除
       parameters:
-        - name: id
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: recipe_id
           in: path
           required: true
           schema:
