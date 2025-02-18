@@ -1,5 +1,6 @@
 import React from "react";
 import HomeCalendar from "./components/HomeCalendar";
+import "./App.css";
 
 function App() {
   return (
