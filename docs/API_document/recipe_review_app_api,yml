@@ -25,6 +25,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DailyRecipeList'
+              example:
+                id: "1"
+                date: "2025-1-1"
+                meal_type: "morning"
+                recipes: 
+                  id: "1"
+                  calendar_entry_id: "1"
+                  title: "オムライス"
+                  description: ""
+                  recipe_url: "https://www.sirogohan.com/recipe/omuraisukihon/"
+                  recipe_reviews:
+                    id: "1"
+                    recipe_id: "1"
+                    rating: "5"
+                  recipe_assets:
+                    id: "1"
+                    recipe_id: "1"
+                    img_url: "https://www.sirogohan.com/_files/recipe/images/omuraisu/omuraisu9142.JPよく分からない。S3に上げるとどうなる？"
+
     post:
       summary: レシピ新規登録
       description: レシピ新規登録
