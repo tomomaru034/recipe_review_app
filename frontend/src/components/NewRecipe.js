@@ -93,7 +93,14 @@ const NewRecipe = () => {
             onChange={(e) => setImageUrl(e.target.value)}
           />
         </div>
-        <button type="submit">登録</button>
+        <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+          <button type="button" onClick={() => navigate("/")} style={{ padding: '8px 16px', cursor: 'pointer' }}>
+            戻る
+          </button>
+          <button type="submit" style={{ padding: '8px 16px', cursor: 'pointer' }}>
+            保存
+          </button>
+        </div>
       </form>
     </div>
   );
