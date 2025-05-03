@@ -8,12 +8,17 @@ servers:
     description: Localサーバ
 
 paths:
-  /recipes/{user_id}:
+  /recipes/{user_id}/{date}:
     get:
       summary: レシピ情報取得
       description: レシピ情報取得
       parameters:
         - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: date
           in: path
           required: true
           schema:
@@ -25,24 +30,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DailyRecipeList'
-    post:
-      summary: レシピ新規登録
-      description: レシピ新規登録
-      parameters:
-        - name: user_id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Recipe'
-      responses:
-        '201':
-          description: OK
+              example:
+                id: "1"
+                title: "オムライス"
+                meal_type: "morning"
 
   /recipes/{user_id}/{recipe_id}:
     get:
@@ -66,6 +57,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Recipe'
+              example:
+                id: "1"
+                title: "オムライス"
+                date: "2025-1-1"
+                meal_type: "morning"
+                recipe_url: "https://www.sirogohan.com/recipe/omuraisukihon/"
+                description: ""
+                Rate:
+                  id: "1"
+                  recipe_id: "1"
+                  rate: "5"
+                Assets:
+                  id: "1"
+                  recipe_id: "1"
+                  img_url: "https://www.sirogohan.com/_files/recipe/images/omuraisu/omuraisu9142.JP※S3上の画像パス"
+
     put:
       summary: レシピ詳細更新
       description: レシピ詳細更新
@@ -89,6 +96,69 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+              example:
+                id: "1"
+                title: "オムライス"
+                date: "2025-1-1"
+                meal_type: "morning"
+                recipe_url: "https://www.sirogohan.com/recipe/omuraisukihon/"
+                description: ""
+                Rate:
+                  id: "1"
+                  recipe_id: "1"
+                  rate: "5"
+                Assets:
+                  id: "1"
+                  recipe_id: "1"
+                  img_url: "https://www.sirogohan.com/_files/recipe/images/omuraisu/omuraisu9142.JP※S3上の画像パス"
+
+    post:
+      summary: レシピ新規登録
+      description: レシピ新規登録
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: recipe_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+              example:
+                id: "1"
+                title: "オムライス"
+                date: "2025-1-1"
+                meal_type: "morning"
+                recipe_url: "https://www.sirogohan.com/recipe/omuraisukihon/"
+                description: ""
+                Rate:
+                  id: "1"
+                  recipe_id: "1"
+                  rate: "5"
+                Assets:
+                  id: "1"
+                  recipe_id: "1"
+                  img_url: "https://www.sirogohan.com/_files/recipe/images/omuraisu/omuraisu9142.JP※S3上の画像パス"
+
     delete:
       summary: レシピ削除
       description: レシピ削除
@@ -110,7 +180,7 @@ paths:
   /recipes/{user_id}/recipe_reviews:
     get:
       summary: レシピレビュー情報取得
-      description: レシピレビュー情報取得
+      description: ランキング画面表示用データ
       parameters:
         - name: user_id
           in: path
@@ -124,6 +194,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RecipeReview'
+              example:
+                id: "1"
+                title: "オムライス"
+                rate: "5"
+                img_url: "https://www.sirogohan.com/_files/recipe/images/omuraisu/omuraisu9142.JP※S3上の画像パス"
 
 components:
   schemas:
@@ -134,13 +209,10 @@ components:
           type: integer
         date:
           type: string
+        title:
+          type: string
         meal_type:
           type: string
-        recipes:
-          type: array
-          items:
-            $ref: "#/components/schemas/Recipe"
-          description: レシピ詳細
       description: 日別レシピ一覧
 
     Recipe:
@@ -156,26 +228,26 @@ components:
           type: string
         recipe_url:
           type: string
-        recipe_reviews:
+        Rate:
           type: array
           items:
-            $ref: "#/components/schemas/Review"
+            $ref: "#/components/schemas/Rate"
           description: レシピレビュー
-        recipe_assets:
+        Asett:
           type: array
           items:
             $ref: "#/components/schemas/Asset"
           description: レシピ関連情報
       description: レシピ詳細情報
 
-    Review:
+    Rate:
       type: object
       properties:
         id:
           type: integer
         recipe_id:
           type: integer
-        rating:
+        rate:
           type: integer
       description: レシピレビュー
 
@@ -195,12 +267,10 @@ components:
       properties:
         id:
           type: integer
-        recipe_id:
-          type: integer
         title:
           type: string
-        rating:
+        rate:
           type: integer
         img_url:
           type: string
-      description: レシピレビューサムネイル
+      description: ランキング画面レシピサムネイル

@@ -1,0 +1,56 @@
+/* カレンダー全体の背景色 */
+.react-calendar {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 月表示部分の背景色 */
+.react-calendar__navigation {
+  background-color: none !important;
+  color: white;
+}
+
+/* 選択した日付の背景色 #ff7043*/
+.react-calendar__tile--active {
+  background-color: #ff7043 !important;
+  color: white;
+}
+
+/* 土曜日と日曜日の日付の色を変更 */
+.react-calendar__tile--weekend {
+  color: #e74c3c;
+}
+
+/* 日付タイルのホバー時の背景色 */
+.react-calendar__tile:hover {
+  background-color: #e74c3c;
+}
+
+/* 月のタイトル部分のフォントスタイル */
+.react-calendar__month-view__days__day {
+  font-weight: bold;
+}
+
+/* 日付のテキストスタイル */
+.react-calendar__tile {
+  font-size: 1.2rem;
+}
+
+  /* App.css または カスタムCSSファイル */
+.react-calendar__tile {
+  width: 80px !important;  /* 横幅を広げる */
+  height: 50px !important; /* 縦幅を広げる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;  /* 文字サイズ調整 */
+}
+
+.react-calendar,
+.react-calendar *,
+.react-calendar *:before,
+.react-calendar *:after {
+  text-decoration: none !important;
+}
